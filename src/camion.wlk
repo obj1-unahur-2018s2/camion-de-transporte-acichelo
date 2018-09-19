@@ -15,7 +15,6 @@ object camion
 	{
 		cosas.remove(unaCosa)
 	}
-	
 	method pesoTotal()
 	{
 	  return tara + cosas.sum({cosa => cosa.peso()})
@@ -23,7 +22,7 @@ object camion
 	
 	method excedidoDePeso()
 	{
-		return (cosas.pesoTotal()>pesoMaximo)
+		return (self.pesoTotal()>pesoMaximo)//para llamar metodos de la misma clase usar !!!SELF!!!
 	}
 	
 	method objetosPeligrosos(nivel)
@@ -34,14 +33,28 @@ object camion
 	method objetoMasPeligrosoQue(cosa)
 	{
 		cosas.filter({c => c.nivelDePeligrosidad()>cosa})
+		//return self.objetosPeligrosos(cosa.nivelDePeligrosidad())
 	}
 	
 	method puedeCircularEnRuta(nivelMaximoPeligrosidad)
 	{
-		cosas.any({c => c.nivelDePeligrosidad()>nivelMaximoPeligrosidad})
+		cosas.any({cosa => cosa.nivelDePeligrosidad()>nivelMaximoPeligrosidad})
 	}
 	
+	method tieneAlgoQuePesaEntre(min, max)
+	{
+		cosas.filter({cosa=> cosa.peso().beetwen()})
+	}
 	
+	method cosaMasPesada()
+	{
+		cosas.find({cosa=>cosa.peso()}).max()
+	}
+	
+	method totalBultos()
+	{
+		cosas.sum({cosa=>cosa.bulto()})
+	}
 	
 	
 }
